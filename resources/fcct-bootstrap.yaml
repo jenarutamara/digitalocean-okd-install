@@ -5,28 +5,7 @@ variant: fcos
 version: 1.1.0
 ignition:
   config:
-    merge:
-      - source: SOURCE_URL
+    replace:
+      - source: http://157.230.249.219:8080/okade/bootstrap.ign
         verification:
-          hash: SHA512
-systemd:                        
-  units:                        
-  - name: sethostname.service       
-    enabled: true
-    contents: |                 
-      [Unit]
-      After=NetworkManager-wait-online.service
-      [Service]
-      Type=oneshot
-      ExecStart=/usr/local/bin/run-hostnamectl
-      RemainAfterExit=yes
-      [Install]
-      WantedBy=multi-user.target
-storage:
-  files:
-    - path: /usr/local/bin/run-hostnamectl
-      mode: 0755
-      contents:
-        inline: |
-          #!/usr/bin/bash
-          hostnamectl set-hostname $(curl -s http://169.254.169.254/metadata/v1/hostname)
+          hash: SHA512-d44b527948e7a9405e11676bc0f34d94b38b5198b21774f9eae13f070515a59bb671a1ae42122be2eb06a07d8ab66ae8e385f52de3213f17e0ef4e713f202885
